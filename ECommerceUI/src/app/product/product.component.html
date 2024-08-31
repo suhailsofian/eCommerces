@@ -98,7 +98,14 @@
                     </h6>
                 </div>
             </div>
-
+            <div class="card-footer text-muted d-grid gap-2">
+                <button type="button" class="btn btn-outline-success" [disabled]="!utilityService.isLoggedIn()"
+                        (click)="onButtonClick(product)">
+                    Remove From Cart
+                    <span *ngIf="!utilityService.isLoggedIn()">(Login First)</span>
+                </button>
+                
+            </div>
         </div>
     </div>
 </div>

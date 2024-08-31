@@ -72,6 +72,34 @@ export class RegisterComponent implements OnInit {
     this.navigationService.registerUser(user).subscribe((res: any) => {
       this.message = res.toString();
     });
+
+    this.navigationService
+    .registerUser(user)
+    .subscribe({
+      next: (res: any) => {
+        // if (res.toString() !== 'invalid') {
+          this.message = res;
+         
+        // } else {
+          // this.message = 'Invalid Credentials!';
+        // }
+      },
+      error: (err) => {
+        // Error handling logic
+        console.log('erooor');
+        console.log(err);
+        if (err.error) {
+          // Backend may return a structured error with a message property
+          this.message = err.error;
+        } else if (err.message) {
+          // If err object has a message property directly
+          this.message = err.message;
+        } else {
+          // Default fallback message if no specific error message is found
+          this.message = 'An error occurred while trying to log in. Please try again later.';
+        }
+      }
+    });
   }
 
   //#region Getters

@@ -3,7 +3,7 @@ using ECommerce.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace ECommerce.API.DataAccess.Data;
+namespace ECommerce.API.Data;
 
 public class ApplicationDbContext : DbContext
 {
@@ -13,6 +13,7 @@ public class ApplicationDbContext : DbContext
     {
         
     }
+
     public DbSet<Cart> Carts => Set<Cart>();
     public DbSet<CartItem> CartItems => Set<CartItem>();
     public DbSet<Offer> Offers => Set<Offer>();
@@ -23,10 +24,29 @@ public class ApplicationDbContext : DbContext
      public DbSet<ProductCategory> ProductCategories => Set<ProductCategory>();
      public DbSet<Review> Reviews => Set<Review>();
     public DbSet<User> Users => Set<User>();
-
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Order>()
+            .HasOne(o => o.Payment)
+            .WithMany(p => p.Orders)
+            .HasForeignKey(o => o.Payment.Id)
+            .OnDelete(DeleteBehavior.NoAction); // Prevents cascade delete
+
+          modelBuilder.Entity<Order>()
+             .HasOne(o => o.User)
+            .WithMany(p => p.Orders)
+            .HasForeignKey(o => o.User.Id)
+            .OnDelete(DeleteBehavior.NoAction); // Prevents cascade delete
+
+
         base.OnModelCreating(modelBuilder);
     }
+    
+
+
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     base.OnModelCreating(modelBuilder);
+    // }
 }

@@ -10,3 +10,14 @@ git push -u origin main
 git remote add origin https://github.com/suhailsofian/eCommerces.git
 git branch -M main
 git push -u origin main
+
+--------------------------------------
+docker build -t ecommerce .
+# docker run -d -p 5001:80 — name web-api-container ecommerce
+ docker run --rm -d -e ASPNETCORE_ENVIRONMENT=Development -p 5001:80 ecommerce:latest
+ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=123456" -p 1433:1433 --name sql_server_container -d mcr.microsoft.com/mssql/server
+ docker run -p 5010:5010 -d  angular-docker
+ docker-compose up -d
+ docker-compose ps
+ docker save akshaykrisondevops/node-ec2:latest | ssh -C root@<your_server_ip> docker load
+ docker push your-registry-url/my-app:1.0.0s

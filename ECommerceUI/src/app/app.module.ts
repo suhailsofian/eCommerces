@@ -51,7 +51,7 @@ import { JwtModule } from '@auth0/angular-jwt';
         tokenGetter: () => {
           return localStorage.getItem('user');
         },
-        allowedDomains: ['localhost:7149'],
+        allowedDomains: ['localhost:5001'],
       },
     }),
   ],

@@ -7,7 +7,8 @@ namespace ECommerce.API.Models
         [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public User User { get; set; } = new User();
+        public User? User { get; set; }
+        public int UserId { get; set; }
         public List<CartItem> CartItems { get; set; } = new();
         public bool Ordered { get; set; }
         public string OrderedOn { get; set; } = string.Empty;

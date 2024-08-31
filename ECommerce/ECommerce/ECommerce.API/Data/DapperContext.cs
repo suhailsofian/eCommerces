@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
-namespace ECommerce.API.DataAccess.Data
+namespace ECommerce.API.Data
 {
 	public class DapperContext
 	{
@@ -12,7 +12,7 @@ namespace ECommerce.API.DataAccess.Data
 		public DapperContext(IConfiguration configuration)
 		{
 			_configuration = configuration;
-			_connectionString = _configuration.GetConnectionString("conn");
+			_connectionString = _configuration.GetConnectionString("DB");
 		}
 
 		public IDbConnection CreateConnection()

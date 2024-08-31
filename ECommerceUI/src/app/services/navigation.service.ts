@@ -13,7 +13,7 @@ import {
   providedIn: 'root',
 })
 export class NavigationService {
-  baseurl = 'https://localhost:7149/api/Shopping/';
+  baseurl = 'http://localhost:5001/api/Shopping/';
 
   constructor(private http: HttpClient) {}
 
@@ -83,6 +83,10 @@ export class NavigationService {
 
   addToCart(userid: number, productid: number) {
     let url = this.baseurl + 'InsertCartItem/' + userid + '/' + productid;
+    return this.http.post(url, null, { responseType: 'text' });
+  }
+  removeFromCart(userid: number, productid: number) {
+    let url = this.baseurl + 'DeleteCartItem/' + userid + '/' + productid;
     return this.http.post(url, null, { responseType: 'text' });
   }
 

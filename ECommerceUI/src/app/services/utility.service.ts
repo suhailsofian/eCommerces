@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, window } from 'rxjs';
 import { Cart, Payment, Product, User } from '../models/models';
 import { NavigationService } from './navigation.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,9 @@ export class UtilityService {
 
   constructor(
     private navigationService: NavigationService,
-    private jwt: JwtHelperService
+    private jwt: JwtHelperService,private router: Router
   ) {}
-
+  
   applyDiscount(price: number, discount: number): number {
     let finalPrice: number = price - price * (discount / 100);
     return finalPrice;
@@ -37,7 +38,7 @@ export class UtilityService {
     };
     return user;
   }
-
+  
   setUser(token: string) {
     localStorage.setItem('user', token);
   }
@@ -58,6 +59,17 @@ export class UtilityService {
       if (res.toString() === 'inserted') this.changeCart.next(1);
     });
   }
+  removeFromCart(product: Product) {
+    let productid = product.id;
+    let userid = this.getUser().id;
+
+    this.navigationService.removeFromCart(userid, productid).subscribe((res) => {
+      if (res.toString() === 'deleted') this.changeCart.next(-1);
+    });
+    // this.router.navigate(["/cart"], { state: { refreshed: true } });
+   
+  }
+  
 
   calculatePayment(cart: Cart, payment: Payment) {
     payment.totalAmount = 0;

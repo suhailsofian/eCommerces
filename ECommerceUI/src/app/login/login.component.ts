@@ -38,16 +38,33 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.navigationService
-      .loginUser(this.Email.value, this.PWD.value)
-      .subscribe((res: any) => {
-        if (res.toString() !== 'invalid') {
-          this.message = 'Logged In Successfully.';
-          this.utilityService.setUser(res.toString());
-          console.log(this.utilityService.getUser());
-        } else {
-          this.message = 'Invalid Credentials!';
-        }
-      });
+  .loginUser(this.Email.value, this.PWD.value)
+  .subscribe({
+    next: (res: any) => {
+      if (res.toString() !== 'invalid') {
+        this.message = 'Logged In Successfully.';
+        this.utilityService.setUser(res.toString());
+        console.log(this.utilityService.getUser());
+      } else {
+        this.message = 'Invalid Credentials!';
+      }
+    },
+    error: (err) => {
+      // Error handling logic
+      console.log('erooor');
+      console.log(err);
+      if (err.error) {
+        // Backend may return a structured error with a message property
+        this.message = err.error;
+      } else if (err.message) {
+        // If err object has a message property directly
+        this.message = err.message;
+      } else {
+        // Default fallback message if no specific error message is found
+        this.message = 'An error occurred while trying to log in. Please try again later.';
+      }
+    }
+  });
   }
 
   get Email(): FormControl {
