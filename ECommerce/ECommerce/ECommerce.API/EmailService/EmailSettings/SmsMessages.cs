@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.API.Models.EmailSettings
+namespace ECommerce.API.EmailSettings
 {
     public class SmsMessages
     {

@@ -1,5 +1,5 @@
 ﻿
-using ECommerce.API.Models.EmailSettings;
+using ECommerce.API.EmailSettings;
 
 namespace ECommerce.API
 {

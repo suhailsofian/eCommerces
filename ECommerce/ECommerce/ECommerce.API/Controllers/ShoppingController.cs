@@ -73,6 +73,8 @@ namespace ECommerce.API.Controllers
 
             return BadRequest(errors);
         }
+
+        
             user.CreatedAt = DateTime.Now.ToString(DateFormat);
             user.ModifiedAt = DateTime.Now.ToString(DateFormat);
 

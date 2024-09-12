@@ -1,4 +1,5 @@
-﻿using ECommerce.API.Models.EmailSettings;
+﻿
+using ECommerce.API.EmailSettings;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;

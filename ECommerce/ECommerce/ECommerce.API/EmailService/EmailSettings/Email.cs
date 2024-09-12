@@ -1,4 +1,4 @@
-﻿namespace ECommerce.API.Models.EmailSettings
+﻿namespace ECommerce.API.EmailSettings
 {
     public class Email
     {

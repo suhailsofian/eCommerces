@@ -2,7 +2,7 @@
 using ECommerce.API;
 using ECommerce.API.Data;
 using ECommerce.API.Models;
-using ECommerce.API.Models.EmailSettings;
+using ECommerce.API.EmailSettings;
 using ECommerce.API.Repository;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

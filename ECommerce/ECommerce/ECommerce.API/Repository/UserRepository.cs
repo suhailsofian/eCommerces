@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using ECommerce.API.Data;
 using ECommerce.API.Models;
-using ECommerce.API.Models.EmailSettings;
+using ECommerce.API.EmailSettings;
 using Microsoft.IdentityModel.Tokens;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -28,7 +28,7 @@ namespace ECommerce.API.Repository
             dateformat = this.configuration["Constants:DateFormat"];
         }
 
-        public async Task sendEmailAsync(User user){
+        public async Task sendEmailAsync(UserDto user){
 
               var emailBody = $@"
                     <html>
@@ -114,6 +114,7 @@ namespace ECommerce.API.Repository
 
         public async Task<bool> InsertUserAsync(UserDto user)
         {
+           
             using (SqlConnection connection = new(dbconnection))
             {
                 SqlCommand command = new()
@@ -145,7 +146,7 @@ namespace ECommerce.API.Repository
 
                 command.ExecuteNonQuery();
             }
-            // await sendEmailAsync(user);
+             // await sendEmailAsync(user);
             return true;
         }
 
